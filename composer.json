@@ -47,5 +47,11 @@
             "@test:types",
             "@test:unit"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
     }
 }
