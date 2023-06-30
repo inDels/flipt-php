@@ -41,7 +41,7 @@ final class EvaluateResponse
         $this->match                 = $data['match'] ?? false;
         $this->flagKey               = $data['flagKey'] ?? '';
         $this->segmentKey            = $data['segmentKey'] ?? '';
-        $this->timestamp             = new \DateTime($data['timestamp'] ?? 'now');
+        $this->timestamp             = $this->parseDataTimestamp($data['timestamp']);
         $this->value                 = $data['value'] ?? '';
         $this->requestDurationMillis = $data['requestDurationMillis'] ?? 0.0;
     }
@@ -106,5 +106,19 @@ final class EvaluateResponse
     public function getRequestDurationMillis(): float
     {
         return $this->requestDurationMillis;
+    }
+
+    private function parseDataTimestamp(string $dataTimestamp): \DateTime
+    {
+        $timestamp = new \DateTime('now');
+
+        if (isset($data['timestamp'])) {
+            $timestamp = \DateTime::createFromFormat('Y-m-d\TH:i:s.uu\Z', $dataTimestamp);
+            if (!$timestamp) {
+                $timestamp = \DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $dataTimestamp);
+            }
+        }
+
+        return $timestamp;
     }
 }
