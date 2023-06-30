@@ -41,7 +41,7 @@ final class EvaluateResponse
         $this->match                 = $data['match'] ?? false;
         $this->flagKey               = $data['flagKey'] ?? '';
         $this->segmentKey            = $data['segmentKey'] ?? '';
-        $this->timestamp             = $this->parseDataTimestamp($data['timestamp']);
+        $this->timestamp             = isset($data['timestamp']) ? $this->parseDataTimestamp($data['timestamp']) : new \DateTime('now');
         $this->value                 = $data['value'] ?? '';
         $this->requestDurationMillis = $data['requestDurationMillis'] ?? 0.0;
     }
@@ -110,13 +110,14 @@ final class EvaluateResponse
 
     private function parseDataTimestamp(string $dataTimestamp): \DateTime
     {
-        $timestamp = new \DateTime('now');
+        $timestamp = \DateTime::createFromFormat('Y-m-d\TH:i:s.uu\Z', $dataTimestamp);
 
-        if (isset($data['timestamp'])) {
-            $timestamp = \DateTime::createFromFormat('Y-m-d\TH:i:s.uu\Z', $dataTimestamp);
-            if (!$timestamp) {
-                $timestamp = \DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $dataTimestamp);
-            }
+        if (!$timestamp) {
+            $timestamp = \DateTime::createFromFormat('Y-m-d\TH:i:s.u\Z', $dataTimestamp);
+        }
+
+        if (!$timestamp) {
+            $timestamp = new \DateTime('now');
         }
 
         return $timestamp;
