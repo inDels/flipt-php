@@ -12,7 +12,7 @@ final class EvaluateResponses
     private float $requestDurationMillis;
 
     /**
-     * @var array<string, mixed>
+     * @var array<mixed, mixed>
      */
     private array $responses = [];
 

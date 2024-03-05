@@ -41,7 +41,9 @@ final class EvaluateResponse
         $this->match                 = $data['match'] ?? false;
         $this->flagKey               = $data['flagKey'] ?? '';
         $this->segmentKey            = $data['segmentKey'] ?? '';
-        $this->timestamp             = isset($data['timestamp']) ? $this->parseDataTimestamp($data['timestamp']) : new \DateTime('now');
+        $this->timestamp             = $data['timestamp'] !== ""
+            ? $this->parseDataTimestamp($data['timestamp'])
+            : new \DateTime('now');
         $this->value                 = $data['value'] ?? '';
         $this->requestDurationMillis = $data['requestDurationMillis'] ?? 0.0;
     }
