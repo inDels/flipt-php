@@ -10,6 +10,10 @@ final class EvaluateResponses
     private string $errorMessage = '';
     private string $requestID;
     private float $requestDurationMillis;
+
+    /**
+     * @var array<string, mixed>
+     */
     private array $responses = [];
 
     /**

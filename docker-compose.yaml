@@ -1,0 +1,7 @@
+services:
+  php74:
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+    volumes:
+      - ./:/var/www/html
