@@ -8,6 +8,10 @@ final class EvaluateResponses
 {
     private string $requestID;
     private float $requestDurationMillis;
+
+    /**
+     * @var array<mixed, mixed>
+     */
     private array $responses = [];
 
     /**
