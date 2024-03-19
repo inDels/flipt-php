@@ -144,12 +144,7 @@ final class Flipt
     public function listFlags(string $namespace = 'default'): FlagResponses
     {
         $response     = $this->client->get(
-            self::PATH . $namespace . self::FLAGS,
-            [
-                'headers' => [
-                    'Content-Type' => 'application/json',
-                ],
-            ]
+            self::PATH . $namespace . self::FLAGS
         );
 
         $responseBody = json_decode($response->getBody()->getContents(), true);
