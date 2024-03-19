@@ -106,7 +106,7 @@ final class Flipt
      *
      * @throws ClientExceptionInterface
      */
-    public function batch(array $evaluateRequests, string $namespace = 'default'): BatchResponse
+    public function batch(array $evaluateRequests): BatchResponse
     {
         $json = json_encode(['requests' => $evaluateRequests]);
 
