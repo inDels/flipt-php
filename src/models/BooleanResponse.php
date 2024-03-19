@@ -49,6 +49,11 @@ final class BooleanResponse
         return $this->enabled;
     }
 
+    public function isMatch(): bool
+    {
+        return $this->reason === self::REASON_MATCH;
+    }
+
     public function getReason(): string
     {
         return $this->reason;
