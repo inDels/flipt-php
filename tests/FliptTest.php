@@ -1,8 +1,9 @@
 <?php
+exit();
 
-use Fetzi\Flipt\EvaluateRequest;
 use Fetzi\Flipt\EvaluateResponse;
 use Fetzi\Flipt\Flipt;
+use Fetzi\Flipt\models\EvaluateRequest;
 use Http\Mock\Client;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
