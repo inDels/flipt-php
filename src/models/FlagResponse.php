@@ -29,8 +29,8 @@ final class FlagResponse
         $this->name         = $data['name'] ?? '';
         $this->description  = $data['description'] ?? '';
         $this->enabled      = $data['enabled'] ?? false;
-        $this->createdAt    = new \DateTime($data['createdAt']) ?? null;
-        $this->updatedAt    = new \DateTime($data['updatedAt']) ?? null;
+        $this->createdAt    = isset($data['createdAt']) ? new \DateTime($data['createdAt']) : null;
+        $this->updatedAt    = isset($data['updatedAt']) ? new \DateTime($data['updatedAt']) : null;
         $this->variant      = $data['variants'] ?? [];
         $this->namespaceKey = $data['namespaceKey'] ?? '';
         $this->type         = $data['type'] ?? '';
