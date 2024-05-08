@@ -8,6 +8,7 @@ final class BatchResponse
 {
     public const RESPONSE_TYPE_BOOLEAN  = 'BOOLEAN_EVALUATION_RESPONSE_TYPE';
     public const RESPONSE_TYPE_VARIANT  = 'VARIANT_EVALUATION_RESPONSE_TYPE';
+    public const RESPONSE_TYPE_ERROR    = 'ERROR_EVALUATION_RESPONSE_TYPE';
 
     /**
      * @var BooleanResponse[]
@@ -18,6 +19,11 @@ final class BatchResponse
      * @var VariantResponse[]
      */
     private array $variantResponse      = [];
+
+    /**
+     * @var ErrorResponse[]
+     */
+    private array $errorResponse        = [];
     private string $requestID;
     private float $requestDurationMillis;
 
@@ -35,6 +41,9 @@ final class BatchResponse
                 }
                 if ($response['type'] === self::RESPONSE_TYPE_VARIANT) {
                     $this->variantResponse[] = new VariantResponse($response['variantResponse']);
+                }
+                if ($response['type'] === self::RESPONSE_TYPE_ERROR) {
+                    $this->errorResponse[]   = new ErrorResponse($response['errorResponse']);
                 }
             }
         }
@@ -54,6 +63,14 @@ final class BatchResponse
     public function getVariants(): array
     {
         return $this->variantResponse;
+    }
+
+    /**
+     * @return ErrorResponse[]
+     */
+    public function getErrors(): array
+    {
+        return $this->errorResponse;
     }
 
     public function getRequestID(): string
